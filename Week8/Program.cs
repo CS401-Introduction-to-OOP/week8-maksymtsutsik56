@@ -52,3 +52,30 @@ internal class Parcel : DeliveryItem
         Console.Write($"Dimensions: {Dimensions}");
     }
 }
+
+internal class CargoContainer<T> where T : DeliveryItem
+{
+    private List<T> _cargoItems;
+
+    public CargoContainer()
+    {
+        _cargoItems = new();
+    }
+
+    public void AddItem(T item)
+    {
+        _cargoItems.Add(item);
+    }
+
+    public double GetTotalCost()
+    {
+        double total = default;
+
+        foreach (T item in _cargoItems)
+        {
+            total += item.CalculateCost();
+        }
+
+        return total;
+    }
+}
