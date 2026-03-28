@@ -1,4 +1,4 @@
-﻿Logistics;
+﻿namespace Week8;
 
 internal abstract class DeliveryItem
 {
@@ -77,5 +77,31 @@ internal class CargoContainer<T> where T : DeliveryItem
         }
 
         return total;
+    }
+}
+
+internal class Program
+{
+    static void Main()
+    {
+        Letter letter1 = new("H1A4", 0.150);
+        Letter letter2 = new("H1A5", 0.200);
+
+        Parcel parcel1 = new("MIG29", 12200, "2x12x15");
+        Parcel parcel2 = new("SU25", 15600, "2x8x10");
+
+        letter1.PrintInfo();
+        parcel1.PrintInfo();
+
+        CargoContainer<DeliveryItem> container = new();
+
+        container.AddItem(letter1);
+        container.AddItem(letter2);
+
+        container.AddItem(parcel1);
+        container.AddItem(parcel2);
+
+        Console.WriteLine();
+        Console.WriteLine("total cost: " + container.GetTotalCost().ToString());
     }
 }
